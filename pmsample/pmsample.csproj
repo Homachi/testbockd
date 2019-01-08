@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <Reference Include="System.Net.Json">
-      <HintPath>..\..\..\..\PMMonitor_origin\PMMonitor\Util\System.Net.Json.dll</HintPath>
+      <HintPath>..\System.Net.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
