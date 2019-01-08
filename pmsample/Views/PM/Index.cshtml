@@ -1,0 +1,46 @@
+﻿@model PM
+@{
+    ViewData["Title"] = "PM";
+}
+@using (Html.BeginForm("index", "PM", FormMethod.Post))
+{
+
+    @(Html.DevExtreme().Form()
+                            .FormData(Model)
+                            .Width(400)
+                            .Items(formItems =>
+                            {
+                                formItems.AddSimple()
+                                    .DataField("Station")
+                                    .Editor(e => e.Lookup().DataSource(d => d.Mvc()
+                                                                                .Controller("StationData")
+                                                                                .LoadAction("Get")
+                                                                                .Key("ID")
+                                                                            )
+                                                                            .DataSourceOptions(o => o.Group("Location"))
+                                                                            .Grouped(true)
+                                                                            .CloseOnOutsideClick(true)
+                                                                            .ShowPopupTitle(false)
+                                                                            .DisplayExpr("Name")).CssClass("dx-fieldset");
+                            })
+    )
+
+    @(Html.DevExtreme().Button()
+                            .Text("Load Data")
+                            .UseSubmitBehavior(true)
+    )
+
+}
+    <div id="PM">
+        <p>
+            Station  : <b class="Station">@Model.Station</b><br />
+            DateTime : <b class="DateTime">@Model.DataTime</b><br />
+            PM2.5: <b class="pm-25">@Model.PM25Value</b><br />
+            PM10 : <b class="pm-10">@Model.PM10Value</b><br />
+            SO2 : <b class="SO2">@Model.So2Value</b><br />
+            NO2 : <b class="CO2">@Model.No2Value</b><br />
+            CO  : <b class="CO">@Model.CoValue</b><br />
+            O3  : <b class="O3">@Model.O3Value</b>
+        </p>
+    </div>
+
